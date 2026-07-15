@@ -1,40 +1,373 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dhanalakshmi A - Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhanalakshmi A — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF3EC;
+    --paper-deep:#E3EBE0;
+    --ink:#17261D;
+    --ink-soft:#43594A;
+    --moss:#33654A;
+    --moss-deep:#204632;
+    --clay:#B9722F;
+    --sky:#3E6B84;
+    --line: rgba(23,38,29,0.14);
+    --card:#F7FAF5;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-position: -1px -1px;
+  }
+  ::selection{background:var(--moss); color:var(--paper);}
+  a{color:inherit;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+
+  /* Growth vine signature - runs down the left of the whole page */
+  .vine{
+    position:fixed;
+    left:calc(50% - 460px - 34px);
+    top:0;
+    width:34px;
+    height:100%;
+    pointer-events:none;
+    z-index:0;
+  }
+  @media (max-width:1020px){ .vine{display:none;} }
+  .vine svg{position:sticky; top:0; height:100vh; width:34px;}
+  .vine-path{
+    fill:none; stroke:var(--moss); stroke-width:2;
+    stroke-dasharray: 2400;
+    stroke-dashoffset: 2400;
+    animation: grow 3.5s ease-out forwards;
+  }
+  @keyframes grow{ to{ stroke-dashoffset:0; } }
+  .leaf{opacity:0; animation: leafIn .6s ease-out forwards;}
+
+  header.hero{
+    padding:110px 0 70px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--moss);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px; height:8px; border-radius:50%;
+    background:var(--clay);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(44px, 8vw, 78px);
+    letter-spacing:-0.02em;
+    line-height:0.98;
+    color:var(--moss-deep);
+  }
+  h1 span{display:block; font-style:italic; font-weight:400; color:var(--ink);}
+  .tagline{
+    margin-top:26px;
+    max-width:520px;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+  .contact-row{
+    margin-top:36px;
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    padding:8px 14px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    background:var(--card);
+    text-decoration:none;
+    color:var(--ink);
+    transition:.2s;
+  }
+  .pill:hover{border-color:var(--moss); color:var(--moss-deep); background:#fff;}
+
+  section{padding:64px 0; position:relative;}
+  section + section{border-top:1px solid var(--line);}
+
+  .section-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:34px;
+  }
+  .section-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--clay);
+  }
+  h2{
+    font-family:'Fraunces', serif;
+    font-size:28px;
+    font-weight:600;
+    color:var(--moss-deep);
+  }
+
+  /* About */
+  .about-grid{display:grid; grid-template-columns: 1.3fr 1fr; gap:40px;}
+  @media(max-width:720px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{color:var(--ink-soft); margin-bottom:14px;}
+  .side-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:22px;
+  }
+  .side-card h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:12px;
+  }
+  .side-card ul{list-style:none;}
+  .side-card li{
+    padding:6px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:14.5px;
+  }
+  .side-card li:last-child{border-bottom:none;}
+
+  /* Skills */
+  .skills-wrap{display:flex; flex-wrap:wrap; gap:12px;}
+  .skill-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    padding:10px 16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .skill-chip .dot{width:6px; height:6px; border-radius:50%; background:var(--sky);}
+
+  /* Timeline (education / experience) */
+  .timeline{position:relative; padding-left:28px;}
+  .timeline::before{
+    content:"";
+    position:absolute; left:5px; top:6px; bottom:6px;
+    width:2px; background:linear-gradient(var(--moss), var(--line));
+  }
+  .t-item{position:relative; padding-bottom:36px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:"";
+    position:absolute; left:-27px; top:4px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--moss);
+  }
+  .t-year{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; color:var(--clay); margin-bottom:4px;
+  }
+  .t-title{font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--ink);}
+  .t-org{color:var(--ink-soft); font-size:14.5px; margin-top:2px;}
+  .t-meta{font-size:13.5px; color:var(--ink-soft); margin-top:6px;}
+
+  /* Certifications */
+  .cert-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px;
+  }
+  .cert-card h3{font-family:'Fraunces', serif; font-size:20px; color:var(--moss-deep); margin-bottom:4px;}
+  .cert-card .org{font-size:14px; color:var(--clay); margin-bottom:16px; font-family:'IBM Plex Mono', monospace;}
+  .cert-card ul{padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .cert-card li{margin-bottom:6px;}
+
+  /* Two col: extracurricular / hobbies */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media(max-width:640px){ .two-col{grid-template-columns:1fr;} }
+  .tag-list{display:flex; flex-wrap:wrap; gap:10px;}
+  .tag{
+    font-size:14px;
+    padding:8px 14px;
+    border-radius:100px;
+    background:var(--paper-deep);
+    border:1px solid var(--line);
+  }
+
+  footer{
+    padding:60px 0 80px;
+    text-align:center;
+  }
+  footer .sign{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:22px;
+    color:var(--moss-deep);
+  }
+  footer .fine{
+    margin-top:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .vine-path{animation:none; stroke-dashoffset:0;}
+  }
+</style>
 </head>
 <body>
-    
-<img src="PHOTO.jpeg" alt="Dhanalakshmi A" width="180">
-    
-    <h1>Dhanalakshmi A</h1>
 
-    <h2>B.E. Computer Science and Engineering</h2>
+<div class="vine" aria-hidden="true">
+  <svg viewBox="0 0 34 2000" preserveAspectRatio="none">
+    <path class="vine-path" d="M17 0
+      C 30 100, 4 200, 17 300
+      C 30 400, 4 500, 17 600
+      C 30 700, 4 800, 17 900
+      C 30 1000, 4 1100, 17 1200
+      C 30 1300, 4 1400, 17 1500
+      C 30 1600, 4 1700, 17 1800
+      C 30 1900, 4 1950, 17 2000"/>
+  </svg>
+</div>
 
-    <p><strong>Year:</strong> 4th Year</p>
-    
-    <br>
-<h2>Projects</h2>
-<ul>
-    <li>Student Portfolio Website</li>
-    <li>Student Management System using Python</li>
-    <li>Calculator using HTML, CSS and JavaScript</li>
-</ul>
+<div class="wrap">
 
-    <h3>About Me</h3>
-    <p>
-        I am a 4th Year B.E. Computer Science and Engineering student.
-        I am interested in programming and software development.
-    </p>
+  <header class="hero">
+    <div class="eyebrow">Data Analytics · Computer Science</div>
+    <h1>Dhanalakshmi A<span>building things with data, one root at a time</span></h1>
+    <p class="tagline">Computer Science Engineering student and certified data analyst,
+      based in Thiruvallur, Tamil Nadu — growing skills in Python, SQL, and
+      real-world analytics case studies.</p>
+    <div class="contact-row">
+      <a class="pill" href="mailto:dhanakarthika@gmail.com">dhanakarthika@gmail.com</a>
+      <a class="pill" href="tel:9159922696">+91 91599 22696</a>
+      <a class="pill" href="#">LinkedIn — Dhana</a>
+      <a class="pill" href="#">GitHub — Dhanalakshmi</a>
+      <span class="pill">Gummidipondi, Tamil Nadu</span>
+    </div>
+  </header>
 
-    <h3>Skills</h3>
-    <ul>
-        <li>Python</li>
-        <li>Java</li>
-        <li>C Programming</li>
-        <li>Microsoft Excel</li>
-        <li>MS Office</li>
-    </ul>
+  <section id="about">
+    <div class="section-head"><span class="section-num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a Computer Science Engineering student at Sri Jayaram Institute of
+          Engineering &amp; Technology, currently maintaining a CGPA of 8.0/10.
+          Alongside my degree, I completed a certified internship in data analytics,
+          where I worked hands-on with Python-based analytics tools through
+          real-time case studies.</p>
+        <p>I enjoy the parts of engineering that reward patience — untangling a
+          messy dataset, debugging a script line by line, or, away from the
+          screen, tending to plants and watching them come along slowly.</p>
+      </div>
+      <div class="side-card">
+        <h3>Languages</h3>
+        <ul>
+          <li>Tamil</li>
+          <li>English</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head"><span class="section-num">02</span><h2>Skills</h2></div>
+    <div class="skills-wrap">
+      <div class="skill-chip"><span class="dot"></span>Python Programming</div>
+      <div class="skill-chip"><span class="dot"></span>SQL Programming</div>
+      <div class="skill-chip"><span class="dot"></span>Git &amp; GitHub</div>
+      <div class="skill-chip"><span class="dot"></span>Excel</div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head"><span class="section-num">03</span><h2>Experience &amp; Education</h2></div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-year">2023 — 2027</div>
+        <div class="t-title">B.E. Computer Science Engineering</div>
+        <div class="t-org">Sri Jayaram Institute of Engineering &amp; Technology</div>
+        <div class="t-meta">CGPA: 8.0 / 10</div>
+      </div>
+      <div class="t-item">
+        <div class="t-year">2024</div>
+        <div class="t-title">Data Analytics Internship</div>
+        <div class="t-org">30-day intensive online certification</div>
+        <div class="t-meta">Applied Python-based analytics tools to real-time case studies</div>
+      </div>
+      <div class="t-item">
+        <div class="t-year">2023</div>
+        <div class="t-title">Higher Secondary Certificate (HSC)</div>
+        <div class="t-org">Government Higher Secondary School, Sunnambukulam</div>
+        <div class="t-meta">Percentage: 60.0%</div>
+      </div>
+      <div class="t-item">
+        <div class="t-year">2021</div>
+        <div class="t-title">SSLC</div>
+        <div class="t-org">Government Higher Secondary School, Obasamuthiram</div>
+        <div class="t-meta">Percentage: 95%</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="section-head"><span class="section-num">04</span><h2>Courses &amp; Certifications</h2></div>
+    <div class="cert-card">
+      <h3>MasterClass in Data Analytics</h3>
+      <div class="org">NoviTech R&amp;D Pvt. Ltd — 2024</div>
+      <ul>
+        <li>Completed an intensive 30-day program covering core concepts of data analytics</li>
+        <li>Practiced Python-based analytics tools through real-time case studies</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="more">
+    <div class="section-head"><span class="section-num">05</span><h2>Beyond the Desk</h2></div>
+    <div class="two-col">
+      <div>
+        <h3 style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px;">Extracurricular</h3>
+        <div class="tag-list">
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Communication</span>
+          <span class="tag">Team Collaboration</span>
+          <span class="tag">Editing</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px;">Hobbies</h3>
+        <div class="tag-list">
+          <span class="tag">Planting</span>
+          <span class="tag">Traveling</span>
+          <span class="tag">Painting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="sign">Let's grow something with data.</div>
+    <div class="fine">dhanakarthika@gmail.com · Gummidipondi, Thiruvallur, Tamil Nadu</div>
+  </footer>
+
+</div>
 
 </body>
 </html>
