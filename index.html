@@ -5,369 +5,380 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dhanalakshmi A — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#EEF3EC;
-    --paper-deep:#E3EBE0;
-    --ink:#17261D;
-    --ink-soft:#43594A;
-    --moss:#33654A;
-    --moss-deep:#204632;
-    --clay:#B9722F;
-    --sky:#3E6B84;
-    --line: rgba(23,38,29,0.14);
-    --card:#F7FAF5;
+    --ink:#1B2018;
+    --paper:#F6F1E4;
+    --deep-green:#16302A;
+    --sage:#7C9A82;
+    --gold:#C99A2E;
+    --clay:#A6472E;
+    --line: rgba(27,32,24,0.14);
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
+  *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
     line-height:1.6;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 42px 42px;
-    background-position: -1px -1px;
+    overflow-x:hidden;
   }
-  ::selection{background:var(--moss); color:var(--paper);}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em;}
   a{color:inherit;}
+  .mono{font-family:'JetBrains Mono', monospace; letter-spacing:0.02em;}
 
-  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
-
-  /* Growth vine signature - runs down the left of the whole page */
-  .vine{
-    position:fixed;
-    left:calc(50% - 460px - 34px);
-    top:0;
-    width:34px;
-    height:100%;
-    pointer-events:none;
-    z-index:0;
+  .kolam-row{
+    display:flex; gap:22px; justify-content:center; align-items:center;
   }
-  @media (max-width:1020px){ .vine{display:none;} }
-  .vine svg{position:sticky; top:0; height:100vh; width:34px;}
-  .vine-path{
-    fill:none; stroke:var(--moss); stroke-width:2;
-    stroke-dasharray: 2400;
-    stroke-dashoffset: 2400;
-    animation: grow 3.5s ease-out forwards;
+  .kolam-row span{
+    width:5px; height:5px; border-radius:50%;
+    background:var(--gold);
+    opacity:0.55;
   }
-  @keyframes grow{ to{ stroke-dashoffset:0; } }
-  .leaf{opacity:0; animation: leafIn .6s ease-out forwards;}
 
   header.hero{
-    padding:110px 0 70px;
+    min-height:100vh;
+    background:var(--deep-green);
+    color:var(--paper);
     position:relative;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:8vh 8vw;
+    overflow:hidden;
   }
+  .kolam-bg{
+    position:absolute; inset:0;
+    background-image:radial-gradient(circle, rgba(201,154,46,0.35) 1.4px, transparent 1.4px);
+    background-size:34px 34px;
+    opacity:0;
+    animation:fadeGrid 2.4s ease forwards 0.3s;
+  }
+  @keyframes fadeGrid{ to{opacity:1;} }
+
   .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
-    letter-spacing:.14em;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.18em;
     text-transform:uppercase;
-    color:var(--moss);
-    display:flex; align-items:center; gap:10px;
-    margin-bottom:22px;
+    color:var(--gold);
+    margin-bottom:1.4rem;
+    opacity:0;
+    animation:riseIn 0.8s ease forwards 0.4s;
   }
-  .eyebrow::before{
-    content:"";
-    width:8px; height:8px; border-radius:50%;
-    background:var(--clay);
-    display:inline-block;
+  .hero h1{
+    font-size:clamp(3rem, 9vw, 6.5rem);
+    line-height:0.95;
+    opacity:0;
+    animation:riseIn 0.9s ease forwards 0.6s;
   }
-  h1{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:clamp(44px, 8vw, 78px);
-    letter-spacing:-0.02em;
-    line-height:0.98;
-    color:var(--moss-deep);
+  .hero p.tag{
+    max-width:540px;
+    margin-top:1.8rem;
+    font-size:1.15rem;
+    color:rgba(246,241,228,0.8);
+    opacity:0;
+    animation:riseIn 0.9s ease forwards 0.9s;
   }
-  h1 span{display:block; font-style:italic; font-weight:400; color:var(--ink);}
-  .tagline{
-    margin-top:26px;
-    max-width:520px;
-    font-size:17px;
-    color:var(--ink-soft);
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(18px);}
+    to{opacity:1; transform:translateY(0);}
   }
-  .contact-row{
-    margin-top:36px;
-    display:flex; flex-wrap:wrap; gap:10px;
+  .hero-meta{
+    margin-top:3rem;
+    display:flex; gap:2.2rem; flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    color:rgba(246,241,228,0.7);
+    opacity:0;
+    animation:riseIn 0.9s ease forwards 1.15s;
   }
-  .pill{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    padding:8px 14px;
-    border:1px solid var(--line);
-    border-radius:100px;
-    background:var(--card);
-    text-decoration:none;
-    color:var(--ink);
-    transition:.2s;
-  }
-  .pill:hover{border-color:var(--moss); color:var(--moss-deep); background:#fff;}
-
-  section{padding:64px 0; position:relative;}
-  section + section{border-top:1px solid var(--line);}
-
-  .section-head{
-    display:flex; align-items:baseline; gap:16px;
-    margin-bottom:34px;
-  }
-  .section-num{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; color:var(--clay);
-  }
-  h2{
-    font-family:'Fraunces', serif;
-    font-size:28px;
-    font-weight:600;
-    color:var(--moss-deep);
-  }
-
-  /* About */
-  .about-grid{display:grid; grid-template-columns: 1.3fr 1fr; gap:40px;}
-  @media(max-width:720px){ .about-grid{grid-template-columns:1fr;} }
-  .about-grid p{color:var(--ink-soft); margin-bottom:14px;}
-  .side-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:22px;
-  }
-  .side-card h3{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:.08em; text-transform:uppercase;
-    color:var(--ink-soft); margin-bottom:12px;
-  }
-  .side-card ul{list-style:none;}
-  .side-card li{
-    padding:6px 0;
-    border-bottom:1px dashed var(--line);
-    font-size:14.5px;
-  }
-  .side-card li:last-child{border-bottom:none;}
-
-  /* Skills */
-  .skills-wrap{display:flex; flex-wrap:wrap; gap:12px;}
-  .skill-chip{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13.5px;
-    padding:10px 16px;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:8px;
+  .hero-meta a:hover{color:var(--gold);}
+  .scroll-cue{
+    position:absolute; bottom:6vh; left:8vw;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem; color:rgba(246,241,228,0.5);
     display:flex; align-items:center; gap:10px;
   }
-  .skill-chip .dot{width:6px; height:6px; border-radius:50%; background:var(--sky);}
+  .scroll-cue::after{
+    content:""; width:1px; height:40px; background:rgba(246,241,228,0.35);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{ 50%{opacity:0.3;} }
 
-  /* Timeline (education / experience) */
-  .timeline{position:relative; padding-left:28px;}
+  section{ padding:9vh 8vw; }
+  .divider{ padding:3.5vh 0; }
+
+  .section-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--clay);
+    margin-bottom:1rem;
+  }
+
+  .about-grid{
+    display:grid; grid-template-columns: 1.1fr 1fr; gap:5vw;
+    align-items:start;
+  }
+  .about-grid h2{ font-size:clamp(1.8rem,3.4vw,2.6rem); margin-bottom:1.4rem; }
+  .about-grid p{ max-width:52ch; color:#3A3F33; }
+  .roots{
+    background:#fff; border:1px solid var(--line); border-radius:2px;
+    padding:2rem;
+  }
+  .roots dl{ display:grid; grid-template-columns: auto 1fr; gap:0.6rem 1.4rem; font-size:0.95rem; }
+  .roots dt{ color:var(--clay); font-family:'JetBrains Mono', monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; padding-top:2px;}
+  .roots dd{ color:#3A3F33; }
+
+  .timeline{ position:relative; margin-top:3rem; }
   .timeline::before{
-    content:"";
-    position:absolute; left:5px; top:6px; bottom:6px;
-    width:2px; background:linear-gradient(var(--moss), var(--line));
+    content:""; position:absolute; left:11px; top:6px; bottom:6px; width:1px;
+    background:var(--line);
   }
-  .t-item{position:relative; padding-bottom:36px;}
-  .t-item:last-child{padding-bottom:0;}
-  .t-item::before{
-    content:"";
-    position:absolute; left:-27px; top:4px;
-    width:12px; height:12px; border-radius:50%;
-    background:var(--paper); border:2px solid var(--moss);
+  .t-item{ position:relative; padding-left:44px; margin-bottom:2.6rem; }
+  .t-item:last-child{ margin-bottom:0; }
+  .t-dot{
+    position:absolute; left:0; top:4px; width:23px; height:23px; border-radius:50%;
+    border:1px solid var(--gold); background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
   }
-  .t-year{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px; color:var(--clay); margin-bottom:4px;
-  }
-  .t-title{font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--ink);}
-  .t-org{color:var(--ink-soft); font-size:14.5px; margin-top:2px;}
-  .t-meta{font-size:13.5px; color:var(--ink-soft); margin-top:6px;}
+  .t-dot::after{ content:""; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+  .t-item h3{ font-size:1.25rem; }
+  .t-item .t-meta{ font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:var(--clay); margin:0.3rem 0 0.5rem; }
+  .t-item p{ color:#3A3F33; font-size:0.95rem; max-width:56ch; }
 
-  /* Certifications */
+  .skills-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:3.5rem 5vw; margin-top:2.5rem; }
+  .skill-row{ margin-bottom:1.4rem; }
+  .skill-row:last-child{ margin-bottom:0; }
+  .skill-top{ display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace; font-size:0.82rem; margin-bottom:0.5rem; }
+  .skill-track{ height:6px; background:var(--line); border-radius:3px; overflow:hidden; }
+  .skill-fill{ height:100%; background:linear-gradient(90deg, var(--gold), var(--clay)); width:0; transition:width 1.4s cubic-bezier(.2,.8,.2,1); }
+  .interests{ display:flex; flex-wrap:wrap; gap:0.7rem; margin-top:1.4rem; }
+  .pill{
+    font-family:'JetBrains Mono', monospace; font-size:0.8rem;
+    border:1px solid var(--line); border-radius:20px; padding:0.5rem 1rem;
+    color:#3A3F33;
+  }
+
   .cert-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:26px;
+    background:var(--deep-green); color:var(--paper);
+    border-radius:3px; padding:2.6rem 3vw; margin-top:2.5rem;
+    display:grid; grid-template-columns:1fr 1fr; gap:2rem;
   }
-  .cert-card h3{font-family:'Fraunces', serif; font-size:20px; color:var(--moss-deep); margin-bottom:4px;}
-  .cert-card .org{font-size:14px; color:var(--clay); margin-bottom:16px; font-family:'IBM Plex Mono', monospace;}
-  .cert-card ul{padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
-  .cert-card li{margin-bottom:6px;}
+  .cert-card h3{ color:var(--gold); font-size:1.4rem; margin-bottom:0.5rem; }
+  .cert-card .cert-org{ font-family:'JetBrains Mono', monospace; font-size:0.82rem; color:rgba(246,241,228,0.65); margin-bottom:1.2rem; }
+  .cert-card ul{ list-style:none; }
+  .cert-card li{ position:relative; padding-left:1.3rem; margin-bottom:0.7rem; font-size:0.95rem; color:rgba(246,241,228,0.85); }
+  .cert-card li::before{ content:"·"; position:absolute; left:0; color:var(--gold); font-size:1.4rem; line-height:0.6; }
 
-  /* Two col: extracurricular / hobbies */
-  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
-  @media(max-width:640px){ .two-col{grid-template-columns:1fr;} }
-  .tag-list{display:flex; flex-wrap:wrap; gap:10px;}
-  .tag{
-    font-size:14px;
-    padding:8px 14px;
-    border-radius:100px;
-    background:var(--paper-deep);
-    border:1px solid var(--line);
+  .hobby-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; margin-top:2.5rem; }
+  .hobby-card{
+    border:1px solid var(--line); border-radius:2px; padding:2rem 1.6rem;
+    text-align:center; transition:transform 0.3s ease, border-color 0.3s ease;
   }
+  .hobby-card:hover{ transform:translateY(-4px); border-color:var(--gold); }
+  .hobby-icon{ font-size:1.8rem; margin-bottom:0.8rem; }
+  .hobby-card h4{ font-family:'Fraunces', serif; font-weight:500; font-size:1.05rem; }
 
   footer{
-    padding:60px 0 80px;
-    text-align:center;
+    background:var(--deep-green); color:rgba(246,241,228,0.75);
+    padding:7vh 8vw 5vh; text-align:center;
   }
-  footer .sign{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:22px;
-    color:var(--moss-deep);
+  footer h2{ color:var(--paper); font-size:clamp(1.8rem,4vw,3rem); margin-bottom:1rem; }
+  footer a.contact-link{
+    display:inline-block; margin-top:1.4rem; font-family:'JetBrains Mono', monospace;
+    font-size:0.9rem; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold); padding-bottom:2px;
   }
-  footer .fine{
-    margin-top:10px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    color:var(--ink-soft);
-  }
+  footer .foot-links{ margin-top:2.4rem; display:flex; gap:2rem; justify-content:center; font-family:'JetBrains Mono', monospace; font-size:0.82rem; }
+  footer .foot-links a:hover{ color:var(--gold); }
+  .foot-note{ margin-top:3.5rem; font-size:0.75rem; opacity:0.5; }
 
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (max-width: 800px){
+    .about-grid, .skills-wrap, .cert-card{ grid-template-columns:1fr; }
+    .hobby-grid{ grid-template-columns:1fr 1fr; }
+    section{ padding:8vh 6vw; }
+  }
   @media (prefers-reduced-motion: reduce){
-    .vine-path{animation:none; stroke-dashoffset:0;}
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
   }
 </style>
 </head>
 <body>
 
-<div class="vine" aria-hidden="true">
-  <svg viewBox="0 0 34 2000" preserveAspectRatio="none">
-    <path class="vine-path" d="M17 0
-      C 30 100, 4 200, 17 300
-      C 30 400, 4 500, 17 600
-      C 30 700, 4 800, 17 900
-      C 30 1000, 4 1100, 17 1200
-      C 30 1300, 4 1400, 17 1500
-      C 30 1600, 4 1700, 17 1800
-      C 30 1900, 4 1950, 17 2000"/>
-  </svg>
+<header class="hero">
+  <div class="kolam-bg"></div>
+  <div class="eyebrow">Computer Science Engineering · Data Analytics</div>
+  <h1>Dhanalakshmi&nbsp;A</h1>
+  <p class="tag">Engineering student from Thiruvallur, Tamil Nadu, building a foundation in data analytics — with Python, SQL, and a habit of tending things until they grow.</p>
+  <div class="hero-meta mono">
+    <a href="mailto:dhanakarthika@gmail.com">dhanakarthika@gmail.com</a>
+    <span>9159922696</span>
+    <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="#" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<section class="reveal" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">About</div>
+      <h2>Trained in Python and SQL, certified in data analytics, still deciding which dataset to grow into a career.</h2>
+      <p>Currently pursuing a B.E. in Computer Science Engineering, with hands-on practice through a focused analytics internship. Comfortable moving between problem-solving, clear communication, and the quieter discipline of getting the details right.</p>
+    </div>
+    <div class="roots">
+      <dl>
+        <dt>Based in</dt><dd>Gummidipondi, Thiruvallur, Tamil Nadu</dd>
+        <dt>Languages</dt><dd>Tamil, English</dd>
+        <dt>Email</dt><dd>dhanakarthika@gmail.com</dd>
+        <dt>Phone</dt><dd>9159922696</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<div class="kolam-row divider">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
 </div>
 
-<div class="wrap">
-
-  <header class="hero">
-    <div class="eyebrow">Data Analytics · Computer Science</div>
-    <h1>Dhanalakshmi A<span>building things with data, one root at a time</span></h1>
-    <p class="tagline">Computer Science Engineering student and certified data analyst,
-      based in Thiruvallur, Tamil Nadu — growing skills in Python, SQL, and
-      real-world analytics case studies.</p>
-    <div class="contact-row">
-      <a class="pill" href="mailto:dhanakarthika@gmail.com">dhanakarthika@gmail.com</a>
-      <a class="pill" href="tel:9159922696">+91 91599 22696</a>
-      <a class="pill" href="#">LinkedIn — Dhana</a>
-      <a class="pill" href="#">GitHub — Dhanalakshmi</a>
-      <span class="pill">Gummidipondi, Tamil Nadu</span>
+<section class="reveal" id="education">
+  <div class="section-label">Education</div>
+  <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);">A steady academic record</h2>
+  <div class="timeline">
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <h3>B.E. — Computer Science Engineering</h3>
+      <div class="t-meta">Sri Jayaram Institute Of Engineering &amp; Technology · 2023 – 2027</div>
+      <p>CGPA 8.0 / 10.</p>
     </div>
-  </header>
-
-  <section id="about">
-    <div class="section-head"><span class="section-num">01</span><h2>About</h2></div>
-    <div class="about-grid">
-      <div>
-        <p>I'm a Computer Science Engineering student at Sri Jayaram Institute of
-          Engineering &amp; Technology, currently maintaining a CGPA of 8.0/10.
-          Alongside my degree, I completed a certified internship in data analytics,
-          where I worked hands-on with Python-based analytics tools through
-          real-time case studies.</p>
-        <p>I enjoy the parts of engineering that reward patience — untangling a
-          messy dataset, debugging a script line by line, or, away from the
-          screen, tending to plants and watching them come along slowly.</p>
-      </div>
-      <div class="side-card">
-        <h3>Languages</h3>
-        <ul>
-          <li>Tamil</li>
-          <li>English</li>
-        </ul>
-      </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <h3>HSC</h3>
+      <div class="t-meta">Government Higher Secondary School, Sunnambukulam · 2023</div>
+      <p>60.0%</p>
     </div>
-  </section>
-
-  <section id="skills">
-    <div class="section-head"><span class="section-num">02</span><h2>Skills</h2></div>
-    <div class="skills-wrap">
-      <div class="skill-chip"><span class="dot"></span>Python Programming</div>
-      <div class="skill-chip"><span class="dot"></span>SQL Programming</div>
-      <div class="skill-chip"><span class="dot"></span>Git &amp; GitHub</div>
-      <div class="skill-chip"><span class="dot"></span>Excel</div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <h3>SSLC</h3>
+      <div class="t-meta">Government Higher Secondary School, Obasamuthiram · 2021</div>
+      <p>95%</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="experience">
-    <div class="section-head"><span class="section-num">03</span><h2>Experience &amp; Education</h2></div>
-    <div class="timeline">
-      <div class="t-item">
-        <div class="t-year">2023 — 2027</div>
-        <div class="t-title">B.E. Computer Science Engineering</div>
-        <div class="t-org">Sri Jayaram Institute of Engineering &amp; Technology</div>
-        <div class="t-meta">CGPA: 8.0 / 10</div>
+<div class="kolam-row divider">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<section class="reveal" id="skills">
+  <div class="section-label">Skills &amp; Interests</div>
+  <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);">What I work with</h2>
+  <div class="skills-wrap">
+    <div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Python Programming</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="82%"></div></div>
       </div>
-      <div class="t-item">
-        <div class="t-year">2024</div>
-        <div class="t-title">Data Analytics Internship</div>
-        <div class="t-org">30-day intensive online certification</div>
-        <div class="t-meta">Applied Python-based analytics tools to real-time case studies</div>
+      <div class="skill-row">
+        <div class="skill-top"><span>SQL Programming</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="78%"></div></div>
       </div>
-      <div class="t-item">
-        <div class="t-year">2023</div>
-        <div class="t-title">Higher Secondary Certificate (HSC)</div>
-        <div class="t-org">Government Higher Secondary School, Sunnambukulam</div>
-        <div class="t-meta">Percentage: 60.0%</div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Git &amp; GitHub</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="70%"></div></div>
       </div>
-      <div class="t-item">
-        <div class="t-year">2021</div>
-        <div class="t-title">SSLC</div>
-        <div class="t-org">Government Higher Secondary School, Obasamuthiram</div>
-        <div class="t-meta">Percentage: 95%</div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Excel</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="80%"></div></div>
       </div>
     </div>
-  </section>
+    <div>
+      <div class="section-label" style="margin-bottom:0.6rem;">Also brings</div>
+      <div class="interests">
+        <span class="pill">Problem Solving</span>
+        <span class="pill">Communication</span>
+        <span class="pill">Team Collaboration</span>
+        <span class="pill">Editing</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section id="certifications">
-    <div class="section-head"><span class="section-num">04</span><h2>Courses &amp; Certifications</h2></div>
-    <div class="cert-card">
+<section class="reveal" id="certification">
+  <div class="section-label">Certification</div>
+  <div class="cert-card">
+    <div>
       <h3>MasterClass in Data Analytics</h3>
-      <div class="org">NoviTech R&amp;D Pvt. Ltd — 2024</div>
-      <ul>
-        <li>Completed an intensive 30-day program covering core concepts of data analytics</li>
-        <li>Practiced Python-based analytics tools through real-time case studies</li>
-      </ul>
+      <div class="cert-org">NoviTech R&amp;D Pvt. Ltd · 2024</div>
+      <p style="font-size:0.95rem; color:rgba(246,241,228,0.85);">An intensive 30-day, project-based program in applied data analytics.</p>
     </div>
-  </section>
+    <ul>
+      <li>Completed an intensive 30-day program covering core concepts of data analytics.</li>
+      <li>Practiced Python-based analytics tools through real-time case studies.</li>
+    </ul>
+  </div>
+</section>
 
-  <section id="more">
-    <div class="section-head"><span class="section-num">05</span><h2>Beyond the Desk</h2></div>
-    <div class="two-col">
-      <div>
-        <h3 style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px;">Extracurricular</h3>
-        <div class="tag-list">
-          <span class="tag">Problem Solving</span>
-          <span class="tag">Communication</span>
-          <span class="tag">Team Collaboration</span>
-          <span class="tag">Editing</span>
-        </div>
-      </div>
-      <div>
-        <h3 style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px;">Hobbies</h3>
-        <div class="tag-list">
-          <span class="tag">Planting</span>
-          <span class="tag">Traveling</span>
-          <span class="tag">Painting</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="sign">Let's grow something with data.</div>
-    <div class="fine">dhanakarthika@gmail.com · Gummidipondi, Thiruvallur, Tamil Nadu</div>
-  </footer>
-
+<div class="kolam-row divider">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
 </div>
+
+<section class="reveal" id="hobbies">
+  <div class="section-label">Beyond Work</div>
+  <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);">Hobbies</h2>
+  <div class="hobby-grid">
+    <div class="hobby-card">
+      <div class="hobby-icon">🌱</div>
+      <h4>Planting</h4>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-icon">🧳</div>
+      <h4>Traveling</h4>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-icon">🎨</div>
+      <h4>Painting</h4>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <h2>Let's talk data.</h2>
+  <p>Open to internships and entry-level opportunities in analytics.</p>
+  <a class="contact-link" href="mailto:dhanakarthika@gmail.com">dhanakarthika@gmail.com ↗</a>
+  <div class="foot-links">
+    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="#" target="_blank" rel="noopener">GitHub</a>
+    <span>9159922696</span>
+  </div>
+  <div class="foot-note mono">Gummidipondi, Thiruvallur, Tamil Nadu</div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.id === 'skills'){
+          document.querySelectorAll('.skill-fill').forEach(f=>{
+            f.style.width = f.dataset.width;
+          });
+        }
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
 
 </body>
 </html>
